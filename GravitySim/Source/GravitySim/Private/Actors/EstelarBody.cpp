@@ -19,20 +19,7 @@ AEstelarBody::AEstelarBody()
 void AEstelarBody::BeginPlay()
 {
 	Super::BeginPlay();
-	Mesh->SetSimulatePhysics(true);
-	Mesh->SetEnableGravity(false);
-	float tmass = Mesh->GetMass();
-	tmass = tmass / (4 * PI * density);
-	radius =  pow(tmass ,1.0f / 3.0f);
-	
-	SetActorScale3D(FVector(2 * radius));
-
-	AddGravitationalForce(initialForce);
-	material_ = UMaterialInstanceDynamic::Create(material, this);
-	Mesh->SetMaterial(0, material_);
-	material_->SetScalarParameterValue("AffectsFields", affectedByGravitatoryFields);
-	material_->SetVectorParameterValue("BaseColor", initialForce);
-	Arrow->SetHiddenInGame(!affectedByGravitatoryFields);
+	Init();
 }
 
 // Called every frame
@@ -61,5 +48,23 @@ void AEstelarBody::AddGravitationalForce(FVector forceToAdd) {
 float AEstelarBody::GetMass()
 {
 	return Mesh->GetMass();
+}
+
+void AEstelarBody::Init()
+{
+	Mesh->SetSimulatePhysics(true);
+	Mesh->SetEnableGravity(false);
+	float tmass = Mesh->GetMass();
+	tmass = tmass / (4 * PI * density);
+	radius = pow(tmass, 1.0f / 3.0f);
+
+	SetActorScale3D(FVector(2 * radius));
+
+	AddGravitationalForce(initialForce);
+	material_ = UMaterialInstanceDynamic::Create(material, this);
+	Mesh->SetMaterial(0, material_);
+	material_->SetScalarParameterValue("AffectsFields", affectedByGravitatoryFields);
+	material_->SetVectorParameterValue("BaseColor", initialForce);
+	Arrow->SetHiddenInGame(!affectedByGravitatoryFields);
 }
 

@@ -49,6 +49,9 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Physics")
 		float GetMass();
+
+	UFUNCTION(BlueprintCallable, Category = "Init")
+		void Init();
 private:
 	float radius;
 	UMaterialInstanceDynamic* material_;
