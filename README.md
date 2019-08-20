@@ -1,4 +1,6 @@
 # GravitySimulationUE4
+
+Unreal Engine version 4.22.3
 Gravitatory fields simulation developed in UE4. Physics calculations fully in C++. Menus and UI do in Blueprint
 
 TODO
